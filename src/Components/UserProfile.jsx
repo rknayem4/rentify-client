@@ -15,7 +15,7 @@ const UserProfile = ({ session, isPending }) => {
         "Loading"
       ) : (
         <Dropdown>
-          <Button aria-label="Menu" className={'border-none rounded-full'} variant="secondary">
+          <Button aria-label="Menu" className={'border-none rounded-full'} variant="none">
             <Avatar>
               <Avatar.Image src={session.user?.image} />
               <Avatar.Fallback>
@@ -25,14 +25,14 @@ const UserProfile = ({ session, isPending }) => {
           </Button>
           <Dropdown.Popover>
             <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
-              <Dropdown.Item id="new-file" textValue="New file">
-                <Label>New file</Label>
+              <Dropdown.Item id="new-file" href="/my-booking" textValue="New file">
+                <Label>My Booking</Label>
               </Dropdown.Item>
-              <Dropdown.Item id="copy-link" textValue="Copy link">
-                <Label>Copy link</Label>
+              <Dropdown.Item id="copy-link" href="/my-add" textValue="Copy link">
+                <Label>My Add </Label>
               </Dropdown.Item>
-              <Dropdown.Item id="edit-file" textValue="Edit file">
-                <Label>Edit file</Label>
+              <Dropdown.Item id="edit-file" href="my-profile" textValue="Edit file">
+                <Label>Edit Profile</Label>
               </Dropdown.Item>
               <Dropdown.Item
                 id="delete-file"

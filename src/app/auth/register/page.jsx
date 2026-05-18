@@ -18,23 +18,28 @@ import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
 const page = () => {
-  const onSubmit =async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
-  const { data, error } = await authClient.signUp.email({
+    const { data, error } = await authClient.signUp.email({
       email: user.email,
       password: user.password,
       name: user.name,
       image: user.photo,
     });
-        if (data) {
+    if (data) {
       redirect("/");
     }
     if (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
-    // console.log(data, error);
+  };
+  const handleGoogle = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+    console.log(data);
   };
   return (
     <div
@@ -124,7 +129,11 @@ const page = () => {
               <Separator className="w-2/5" />
             </div>
             <div>
-              <Button variant="outline" className={"rounded-none w-full"}>
+              <Button
+                onClick={handleGoogle}
+                variant="outline"
+                className={"rounded-none w-full"}
+              >
                 <FcGoogle /> Sign In with Google
               </Button>
             </div>

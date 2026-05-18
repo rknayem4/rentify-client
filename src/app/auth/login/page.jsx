@@ -34,6 +34,12 @@ const LoginPage = () => {
     }
     // console.log(user);
   };
+  const handleGoogle =async ()=>{
+     const data = await authClient.signIn.social({
+    provider: "google",
+  });
+  console.log(data)
+  }
   return (
     <div
       className="min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center px-6 py-10"
@@ -126,7 +132,9 @@ const LoginPage = () => {
             <Separator className="w-2/5" />
           </div>
           <div>
-            <Button variant="outline" className={"rounded-none w-full"}>
+            <Button
+            onClick={handleGoogle}
+            variant="outline" className={"rounded-none w-full"}>
               <FcGoogle /> Sign In with Google
             </Button>
           </div>
