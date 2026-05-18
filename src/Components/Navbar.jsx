@@ -1,0 +1,43 @@
+"use client";
+import React from "react";
+import Image from "next/image";
+import { Navigation } from "./Menu";
+import UserProfile from "./UserProfile";
+import NabLink from "./NavLink";
+
+const NavBar = () => {
+  const session = "";
+
+  return (
+    <div className="shadow sticky top-0 min-h-15 flex justify-center items-center text-black bg-white z-20">
+      <div className="container mx-auto flex justify-between   items-center p-2 ">
+        <div className=" flex justify-center items-center gap-4 ">
+          <div className="lg:hidden flex">{<Navigation></Navigation>}</div>
+
+          <Image
+            src="/assets/Logo.png"
+            alt="Logo"
+            width={200}
+            height={200}
+            className="max-sm:w-[40vw] max-w-2xl"
+          />
+        </div>
+        <ul className=" lg:flex gap-4 hidden">
+          <NabLink href={"/"}>Home</NabLink>
+          <NabLink href={"/explore-car"}>Explore Car</NabLink>
+          <NabLink href={"/my-booking"}>My Booking</NabLink>
+          <NabLink href={"/my-add"}>My Add</NabLink>
+        </ul>
+        {session ? (
+          <UserProfile session={session} isPending={isPending}></UserProfile>
+        ) : (
+          <ul className="flex gap-4">
+            <NabLink href={"/auth/login"}>Login</NabLink>
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default NavBar;
