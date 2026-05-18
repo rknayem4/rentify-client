@@ -12,6 +12,7 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
@@ -33,7 +34,7 @@ const page = () => {
     if (error) {
       toast.error(error.message)
     }
-    console.log(data, error);
+    // console.log(data, error);
   };
   return (
     <div

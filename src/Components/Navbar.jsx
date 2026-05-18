@@ -4,9 +4,11 @@ import Image from "next/image";
 import { Navigation } from "./Menu";
 import UserProfile from "./UserProfile";
 import NabLink from "./NavLink";
+import { authClient } from "@/lib/auth-client";
 
 const NavBar = () => {
-  const session = "";
+  const {data: session, isPending}= authClient.useSession()
+  console.log(session)
 
   return (
     <div className="shadow sticky top-0 min-h-15 flex justify-center items-center text-black bg-white z-20">

@@ -1,7 +1,7 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Avatar, Badge, Button, Dropdown, Label } from "@heroui/react";
-import Link from "next/link";
 import { FaUser } from "react-icons/fa";
 
 const UserProfile = ({ session, isPending }) => {
@@ -15,31 +15,32 @@ const UserProfile = ({ session, isPending }) => {
         "Loading"
       ) : (
         <Dropdown>
-          <Button aria-label="Menu" variant="outline" className="border-none">
-            <Badge.Anchor>
-              <Avatar>
-                <Avatar.Image src={session.user?.image} />
-                <Avatar.Fallback><FaUser /></Avatar.Fallback>
-              </Avatar>
-            </Badge.Anchor>
+          <Button aria-label="Menu" className={'border-none rounded-full'} variant="secondary">
+            <Avatar>
+              <Avatar.Image src={session.user?.image} />
+              <Avatar.Fallback>
+                <FaUser />
+              </Avatar.Fallback>
+            </Avatar>
           </Button>
-
           <Dropdown.Popover>
             <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
               <Dropdown.Item id="new-file" textValue="New file">
-                <Link href="/user-profile">
-                  <Label>Profile</Label>
-                </Link>
+                <Label>New file</Label>
               </Dropdown.Item>
-
+              <Dropdown.Item id="copy-link" textValue="Copy link">
+                <Label>Copy link</Label>
+              </Dropdown.Item>
+              <Dropdown.Item id="edit-file" textValue="Edit file">
+                <Label>Edit file</Label>
+              </Dropdown.Item>
               <Dropdown.Item
                 id="delete-file"
                 textValue="Delete file"
                 variant="danger"
+                onClick={handleSignOUt}
               >
-                <Button variant="none"  onClick={handleSignOUt}>
-                  <Label>SignOut</Label>
-                </Button>
+                <Label>LogOut</Label>
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown.Popover>
