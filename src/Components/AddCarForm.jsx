@@ -22,35 +22,72 @@ import toast from "react-hot-toast";
 export function AddCarForm() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.currentTarget);
+  //   const data = Object.fromEntries(formData.entries());
+  //   console.log(data);
+  //   const carData = {
+  //     usrName: user.name,
+  //     userId: user.id,
+  //     userEmail: user?.email,
+  //     carName: data.name,
+  //     price: data.price,
+  //     type: data.type,
+  //     carImage: data.image,
+  //     seat: data.seat,
+  //     status: data.status,
+  //     location: data.location,
+  //     description: data.description,
+  //   };
+  //   const res = await fetch("http://localhost:8000/car-collection", {
+  //     method: "POST",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(carData),
+  //   });
+  //   await res.json();
+  //   toast.success(`${data.name} successfully added!`);
+  //   redirect("/my-add");
+  // };
   const onSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
-    const carData = {
-      usrName: user.name,
-      userId: user.id,
-      userEmail: user?.email,
-      CarName: data.name,
-      price: data.price,
-      type: data.type,
-      CarImage: data.image,
-      seat: data.seat,
-      status: data.status,
-      location: data.location,
-      description: data.description,
-    };
-    const res = await fetch("http://localhost:8000/car-collection", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(carData),
-    });
-    await res.json();
-    toast.success(`${data.name} successfully added!`);
-    redirect("/my-add");
+  e.preventDefault();
+
+  if (!user) {
+    toast.error("Please login first");
+    return;
+  }
+
+  const formData = new FormData(e.currentTarget);
+  const data = Object.fromEntries(formData.entries());
+
+  const carData = {
+    usrName: user?.name,
+    userId: user?.id,
+    userEmail: user?.email,
+    carName: data.name,
+    price: data.price,
+    type: data.type,
+    carImage: data.image,
+    seat: data.seat,
+    status: data.status,
+    location: data.location,
+    description: data.description,
   };
+
+  const res = await fetch("http://localhost:8000/car-collection", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(carData),
+  });
+
+  await res.json();
+
+  toast.success(`${data.name} successfully added!`);
+};
   const carTypes = [
     { id: "sedan", name: "Sedan" },
     { id: "suv", name: "SUV" },
