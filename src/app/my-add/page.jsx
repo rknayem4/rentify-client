@@ -136,12 +136,12 @@ const AddCarPage = () => {
                 </Select.Trigger>
                 <Select.Popover>
                   <ListBox>
-                    <ListBox.Item id="florida" textValue="available">
+                    <ListBox.Item id="Available" textValue="available">
                       Available
                       <ListBox.ItemIndicator />
                     </ListBox.Item>
 
-                    <ListBox.Item id="washington" textValue="busy">
+                    <ListBox.Item id="Now is busy" textValue="busy">
                       Now is busy
                       <ListBox.ItemIndicator />
                     </ListBox.Item>

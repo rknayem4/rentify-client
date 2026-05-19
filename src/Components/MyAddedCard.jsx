@@ -33,9 +33,20 @@ const MyAddedCard = ({ res }) => {
         <Card.Header className="gap-1">
           <Card.Title className="pr-8">{carName}</Card.Title>
         </Card.Header>
+        <div>
+          <div className="flex justify-between items-center gap-3">
+            <span>Daily Price:  {price}</span>
+            <span>Seat Capacity:  {seat}</span>
+          </div>
+          <div className="flex justify-between items-center gap-3">
+            <span>Pickup Location:  {location}</span>
+            <span>Status:  {status}</span>
+          </div>
+
+        </div>
         <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
           <EditCardForm res={res}></EditCardForm>
-          <DeleteAlert carName={carName} ></DeleteAlert>
+          <DeleteAlert res={res}></DeleteAlert>
         </Card.Footer>
       </div>
     </Card>

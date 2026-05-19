@@ -19,7 +19,7 @@ import {
 import toast from "react-hot-toast";
 import { FaEdit } from "react-icons/fa";
 
-export function EditCardForm({res}) {
+export function EditCardForm({ res }) {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
@@ -163,26 +163,34 @@ export function EditCardForm({res}) {
                         </Select.Trigger>
                         <Select.Popover>
                           <ListBox>
-                            <ListBox.Item id="florida" textValue="available">
+                            <ListBox.Item id="Available" textValue="available">
                               Available
                               <ListBox.ItemIndicator />
                             </ListBox.Item>
 
-                            <ListBox.Item id="washington" textValue="busy">
-                              Now is busy
+                            <ListBox.Item id="Available" textValue="busy">
+                              Available
                               <ListBox.ItemIndicator />
                             </ListBox.Item>
                           </ListBox>
                         </Select.Popover>
                       </Select>
                     </div>
-               
-                    <TextField isRequired name="location" defaultValue={location}>
+
+                    <TextField
+                      isRequired
+                      name="location"
+                      defaultValue={location}
+                    >
                       <Label>Pickup Location</Label>
                       <Input placeholder="Mirpur-10, Dhaka-1216." />
                       <FieldError />
                     </TextField>
-                    <TextField isRequired name="description"defaultValue={description}>
+                    <TextField
+                      isRequired
+                      name="description"
+                      defaultValue={description}
+                    >
                       <Label>Description</Label>
                       <TextArea placeholder="Tell us about your car" />
                       <Description>Minimum 10 characters</Description>
@@ -194,9 +202,6 @@ export function EditCardForm({res}) {
                       <FloppyDisk />
                       Save changes
                     </Button>
-                    {/* <Button type="reset" variant="secondary">
-                      Cancel
-                    </Button> */}
                   </Fieldset.Actions>
                 </Fieldset>
               </Form>
