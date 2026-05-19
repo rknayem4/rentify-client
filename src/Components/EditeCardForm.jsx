@@ -16,78 +16,50 @@ import {
   Modal,
   Select,
 } from "@heroui/react";
-import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
+import { FaEdit } from "react-icons/fa";
 
-export function AddCarForm() {
+export function EditCardForm({res}) {
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  // const onSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.currentTarget);
-  //   const data = Object.fromEntries(formData.entries());
-  //   console.log(data);
-  //   const carData = {
-  //     usrName: user.name,
-  //     userId: user.id,
-  //     userEmail: user?.email,
-  //     carName: data.name,
-  //     price: data.price,
-  //     type: data.type,
-  //     carImage: data.image,
-  //     seat: data.seat,
-  //     status: data.status,
-  //     location: data.location,
-  //     description: data.description,
-  //   };
-  //   const res = await fetch("http://localhost:8000/car-collection", {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(carData),
-  //   });
-  //   await res.json();
-  //   toast.success(`${data.name} successfully added!`);
-  //   redirect("/my-add");
-  // };
+
   const onSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!user) {
-    toast.error("Please login first");
-    return;
-  }
+    if (!user) {
+      toast.error("Please login first");
+      return;
+    }
 
-  const formData = new FormData(e.currentTarget);
-  const data = Object.fromEntries(formData.entries());
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
 
-  const carData = {
-    usrName: user?.name,
-    userId: user?.id,
-    userEmail: user?.email,
-    carName: data.name,
-    price: data.price,
-    type: data.type,
-    carImage: data.image,
-    seat: data.seat,
-    status: data.status,
-    location: data.location,
-    description: data.description,
+    const carData = {
+      usrName: user?.name,
+      userId: user?.id,
+      userEmail: user?.email,
+      carName: data.name,
+      price: data.price,
+      type: data.type,
+      carImage: data.image,
+      seat: data.seat,
+      status: data.status,
+      location: data.location,
+      description: data.description,
+    };
+
+    const res = await fetch("http://localhost:8000/car-collection", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(carData),
+    });
+
+    await res.json();
+
+    toast.success(`${data.name} successfully added!`);
   };
-
-  const res = await fetch("http://localhost:8000/car-collection", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(carData),
-  });
-
-  await res.json();
-
-  toast.success(`${data.name} successfully added!`);
-};
   const carTypes = [
     { id: "sedan", name: "Sedan" },
     { id: "suv", name: "SUV" },
@@ -98,32 +70,44 @@ export function AddCarForm() {
     { id: "luxury", name: "Luxury Car" },
     { id: "sports", name: "Sports Car" },
   ];
+  const {
+    carImage,
+    carName,
+    description,
+    location,
+    price,
+    seat,
+    status,
+    type,
+    userEmail,
+    userId,
+    usrName,
+    _id,
+  } = res;
   return (
     <Modal>
-      <Button variant="secondary">Add </Button>
+      <Button variant="secondary" className={"rounded-md "}>
+        <FaEdit />
+        Add{" "}
+      </Button>
       <Modal.Backdrop>
         <Modal.Container>
           <Modal.Dialog>
             <Modal.CloseTrigger />
-            {/* <Modal.Header>
-              <Modal.Icon className="bg-default text-foreground">
-                <Rocket className="size-5" />
-              </Modal.Icon>
-              <Modal.Heading>Welcome to HeroUI</Modal.Heading>
-            </Modal.Header> */}
+
             <Modal.Body>
               <Form className="w-full max-w-150" onSubmit={onSubmit}>
                 <Fieldset>
                   <Fieldset.Legend>Add your car</Fieldset.Legend>
                   <Description>Your car Information.</Description>
                   <FieldGroup>
-                    <TextField isRequired name="name">
+                    <TextField isRequired name="name" defaultValue={carName}>
                       <Label>Car Name</Label>
                       <Input placeholder="Mitsubishi Pajero" />
                       <FieldError />
                     </TextField>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                      <TextField isRequired name="price">
+                      <TextField isRequired name="price" defaultValue={price}>
                         <Label>Daily Rent Price</Label>
                         <Input placeholder=" Your care rent" />
                         <FieldError />
@@ -155,13 +139,13 @@ export function AddCarForm() {
                         </Select.Popover>
                       </Select>
                     </div>
-                    <TextField isRequired name="image">
+                    <TextField isRequired name="image" defaultValue={carImage}>
                       <Label>Car Image URI</Label>
                       <Input placeholder="https://image.com/car54215.jpg" />
                       <FieldError />
                     </TextField>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                      <TextField isRequired name="seat">
+                      <TextField isRequired name="seat" defaultValue={seat}>
                         <Label>Seat Capacity</Label>
                         <Input placeholder="Your car seat capacity" />
                         <FieldError />
@@ -192,20 +176,13 @@ export function AddCarForm() {
                         </Select.Popover>
                       </Select>
                     </div>
-                    {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                            <TextField isRequired name="seat">
-                              <Label>Seat Capacity</Label>
-                              <Input placeholder=" Your care rent" />
-                              <FieldError />
-                            </TextField>
-                            
-                          </div> */}
-                    <TextField isRequired name="location">
+               
+                    <TextField isRequired name="location" defaultValue={location}>
                       <Label>Pickup Location</Label>
                       <Input placeholder="Mirpur-10, Dhaka-1216." />
                       <FieldError />
                     </TextField>
-                    <TextField isRequired name="description">
+                    <TextField isRequired name="description"defaultValue={description}>
                       <Label>Description</Label>
                       <TextArea placeholder="Tell us about your car" />
                       <Description>Minimum 10 characters</Description>
@@ -217,18 +194,13 @@ export function AddCarForm() {
                       <FloppyDisk />
                       Save changes
                     </Button>
-                    <Button type="reset" variant="secondary">
+                    {/* <Button type="reset" variant="secondary">
                       Cancel
-                    </Button>
+                    </Button> */}
                   </Fieldset.Actions>
                 </Fieldset>
               </Form>
             </Modal.Body>
-            {/* <Modal.Footer>
-              <Button className="w-full" slot="close">
-                Continue
-              </Button>
-            </Modal.Footer> */}
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Backdrop>

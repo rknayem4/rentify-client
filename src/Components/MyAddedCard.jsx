@@ -1,8 +1,9 @@
 import { Button, Card, CloseButton } from "@heroui/react";
 import Image from "next/image";
-import React from "react";
+import { EditCardForm } from "./EditeCardForm";
+import { DeleteAlert } from "./DeleteAlert";
 
-const CarCard = ({ data }) => {
+const MyAddedCard = ({ res }) => {
   const {
     carImage,
     carName,
@@ -16,35 +17,29 @@ const CarCard = ({ data }) => {
     userId,
     usrName,
     _id,
-  } = data;
-
+  } = res;
   return (
-    <Card className="w-full flex ">
+    <Card className="w-full flex flex-col">
       <div className=" w-full flex justify-items-center flex-2">
         <Image
           className="mx-auto rounded-2xl"
-          src={data?.carImage}
+          src={res?.carImage}
           width={300}
           height={400}
           alt={carName}
         />
       </div>
-      <div className="flex flex-1 flex-col gap-3 ">
+      <div className="flex flex-1 flex-col gap-3">
         <Card.Header className="gap-1">
           <Card.Title className="pr-8">{carName}</Card.Title>
         </Card.Header>
         <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col">
-            <span className="text-sm font-medium text-foreground">
-              Only 10 spots
-            </span>
-            <span className="text-xs text-muted">Submission ends Oct 10.</span>
-          </div>
-          <Button className="w-full sm:w-auto">Apply Now</Button>
+          <EditCardForm res={res}></EditCardForm>
+          <DeleteAlert carName={carName} ></DeleteAlert>
         </Card.Footer>
       </div>
     </Card>
   );
 };
 
-export default CarCard;
+export default MyAddedCard;
