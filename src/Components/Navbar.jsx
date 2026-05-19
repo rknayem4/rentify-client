@@ -8,7 +8,7 @@ import { authClient } from "@/lib/auth-client";
 
 const NavBar = () => {
   const {data: session, isPending}= authClient.useSession()
- console.log(session)
+//  console.log(session)
   return (
     <div className="shadow sticky top-0 min-h-15 flex justify-center items-center text-black bg-white z-20">
       <div className="container mx-auto flex justify-between   items-center p-2 ">

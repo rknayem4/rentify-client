@@ -1,9 +1,10 @@
-import React from 'react';
+import { AddCarForm } from "@/Components/AddCarForm";
+import React from "react";
 
 const addCarPage = () => {
   return (
-    <div>
-      Add Car 
+    <div className="flex justify-center flex-col items-center">
+      <AddCarForm />
     </div>
   );
 };
