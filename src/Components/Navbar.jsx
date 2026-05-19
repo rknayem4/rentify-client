@@ -25,7 +25,7 @@ const NavBar = () => {
         </div>
         <ul className=" lg:flex gap-4 hidden">
           <NabLink href={"/"}>Home</NabLink>
-          <NabLink href={"/explore-car"}>Explore Car</NabLink>
+          <NabLink href={"/explore-car"}>Explore Cars</NabLink>
           <NabLink href={"/my-booking"}>My Booking</NabLink>
           <NabLink href={"/my-added-car"}>My Added </NabLink>
         </ul>

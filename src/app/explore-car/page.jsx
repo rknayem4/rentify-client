@@ -8,9 +8,9 @@ const ExploreCarPage = async () => {
   return (
     <div className="container mx-auto">
       <h2>All Car Here</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {cars.map((data) => (
-          <CarCard key={data._id} data={data}></CarCard>
+      <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {cars.map((car) => (
+          <CarCard key={car._id} car={car}></CarCard>
         ))}
       </div>
     </div>

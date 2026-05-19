@@ -9,10 +9,8 @@ const MyAddedCar = async () => {
   const { user } = await auth.api.getSession({
     headers: await headers(),
   });
-  console.log(user.id);
   const res = await fetch(`http://localhost:8000/car-collection/${user?.id}`);
   const data = await res.json();
-  // console.log(data);
   return (
     <div className="container mx-auto">
       <div className="my-3 flex justify-end ">

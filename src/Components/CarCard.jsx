@@ -1,8 +1,9 @@
 import { Button, Card, CloseButton } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
-const CarCard = ({ data }) => {
+const CarCard = ({ car }) => {
   const {
     carImage,
     carName,
@@ -16,32 +17,48 @@ const CarCard = ({ data }) => {
     userId,
     usrName,
     _id,
-  } = data;
+  } = car;
 
   return (
-    <Card className="w-full flex ">
-      <div className=" w-full flex justify-items-center flex-2">
+    <Card
+      className="min-w-[320px] bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+    >
+      {/* Image */}
+      <div className="relative h-56 w-full">
         <Image
-          className="mx-auto rounded-2xl"
-          src={data?.carImage}
-          width={300}
-          height={400}
+          src={carImage}
           alt={carName}
+          fill
+          className="object-cover"
         />
       </div>
-      <div className="flex flex-1 flex-col gap-3 ">
-        <Card.Header className="gap-1">
-          <Card.Title className="pr-8">{carName}</Card.Title>
-        </Card.Header>
-        <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col">
-            <span className="text-sm font-medium text-foreground">
-              Only 10 spots
-            </span>
-            <span className="text-xs text-muted">Submission ends Oct 10.</span>
+
+      {/* Content */}
+      <div className="p-6">
+        <div className="flex items-center justify-between">
+          <h3 className="text-2xl font-bold text-[#004078]">{carName}</h3>
+
+          <span className="text-sm bg-[#eef5ff] text-[#004078] px-3 py-1 rounded-full">
+            {type}
+          </span>
+        </div>
+
+        <p className="text-gray-500 mt-3 line-clamp-2">{description}</p>
+
+        <div className="flex items-center justify-between mt-6">
+          <div>
+            <p className="text-sm text-gray-500">Daily Rent</p>
+
+            <h4 className="text-2xl font-bold text-[#753fdb]">৳{price}</h4>
           </div>
-          <Button className="w-full sm:w-auto">Apply Now</Button>
-        </Card.Footer>
+
+          <Link
+            href={`/cars/${_id}`}
+            className="px-5 py-3 rounded-xl bg-[#004078] text-white hover:bg-[#00315f] transition-all duration-300"
+          >
+            View Details
+          </Link>
+        </div>
       </div>
     </Card>
   );

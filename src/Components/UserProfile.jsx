@@ -28,11 +28,12 @@ const UserProfile = ({ session, isPending }) => {
               <Dropdown.Item id="new-file" href="/my-booking" textValue="New file">
                 <Label>My Booking</Label>
               </Dropdown.Item>
-              <Dropdown.Item id="copy-link" href="/my-add" textValue="Copy link">
-                <Label>My Add </Label>
+
+              <Dropdown.Item id="copy-link" href="/my-added-car" textValue="Copy link">
+                <Label>My Added Car </Label>
               </Dropdown.Item>
-              <Dropdown.Item id="edit-file" href="my-profile" textValue="Edit file">
-                <Label>Edit Profile</Label>
+              <Dropdown.Item id="edit-file" href="/my-add" textValue="Edit file">
+                <Label>Add Car</Label>
               </Dropdown.Item>
               <Dropdown.Item
                 id="delete-file"

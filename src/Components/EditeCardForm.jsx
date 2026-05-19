@@ -1,5 +1,4 @@
 "use client";
-import { authClient } from "@/lib/auth-client";
 import { FloppyDisk } from "@gravity-ui/icons";
 import {
   Button,
@@ -18,58 +17,11 @@ import {
 } from "@heroui/react";
 import toast from "react-hot-toast";
 import { FaEdit } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export function EditCardForm({ res }) {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!user) {
-      toast.error("Please login first");
-      return;
-    }
-
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-
-    const carData = {
-      usrName: user?.name,
-      userId: user?.id,
-      userEmail: user?.email,
-      carName: data.name,
-      price: data.price,
-      type: data.type,
-      carImage: data.image,
-      seat: data.seat,
-      status: data.status,
-      location: data.location,
-      description: data.description,
-    };
-
-    const res = await fetch("http://localhost:8000/car-collection", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(carData),
-    });
-
-    await res.json();
-
-    toast.success(`${data.name} successfully added!`);
-  };
-  const carTypes = [
-    { id: "sedan", name: "Sedan" },
-    { id: "suv", name: "SUV" },
-    { id: "hatchback", name: "Hatchback" },
-    { id: "microbus", name: "Microbus" },
-    { id: "pickup", name: "Pickup" },
-    { id: "crossover", name: "Crossover" },
-    { id: "luxury", name: "Luxury Car" },
-    { id: "sports", name: "Sports Car" },
-  ];
+  // const { data: session } = authClient.useSession();
+  // const user = session?.user;
   const {
     carImage,
     carName,
@@ -84,6 +36,54 @@ export function EditCardForm({ res }) {
     usrName,
     _id,
   } = res;
+
+const router = useRouter();
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.currentTarget);
+  const formValues = Object.fromEntries(formData.entries());
+
+  const carChange = {
+    carName: formValues.name,
+    price: formValues.price,
+    type: formValues.type,
+    carImage: formValues.image,
+    seat: formValues.seat,
+    status: formValues.status,
+    location: formValues.location,
+    description: formValues.description,
+  };
+
+  const res = await fetch(
+    `http://localhost:8000/car-collection/${_id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(carChange),
+    }
+  );
+
+  await res.json();
+
+  toast.success("Car updated successfully");
+
+  router.push("/my-added-car");
+};
+  const carTypes = [
+    { id: "sedan", name: "Sedan" },
+    { id: "suv", name: "SUV" },
+    { id: "hatchback", name: "Hatchback" },
+    { id: "microbus", name: "Microbus" },
+    { id: "pickup", name: "Pickup" },
+    { id: "crossover", name: "Crossover" },
+    { id: "luxury", name: "Luxury Car" },
+    { id: "sports", name: "Sports Car" },
+  ];
+
   return (
     <Modal>
       <Button variant="secondary" className={"rounded-md "}>
@@ -96,7 +96,7 @@ export function EditCardForm({ res }) {
             <Modal.CloseTrigger />
 
             <Modal.Body>
-              <Form className="w-full max-w-150" onSubmit={onSubmit}>
+              <Form className="w-full max-w-150" onSubmit={handleSubmit}>
                 <Fieldset>
                   <Fieldset.Legend>Add your car</Fieldset.Legend>
                   <Description>Your car Information.</Description>
@@ -198,7 +198,7 @@ export function EditCardForm({ res }) {
                     </TextField>
                   </FieldGroup>
                   <Fieldset.Actions>
-                    <Button type="submit">
+                    <Button  type="submit">
                       <FloppyDisk />
                       Save changes
                     </Button>

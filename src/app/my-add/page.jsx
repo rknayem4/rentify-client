@@ -72,11 +72,11 @@ const AddCarPage = () => {
     { id: "sports", name: "Sports Car" },
   ];
   return (
-    <div className="min-w-screen flex justify-center flex-col items-center">
+    <div className="min-w-screen mt-12 flex justify-center flex-col items-center">
       <Form className="w-full max-w-150" onSubmit={onSubmit}>
         <Fieldset>
-          <Fieldset.Legend>Add your car</Fieldset.Legend>
-          <Description>Your car Information.</Description>
+          <Fieldset.Legend className="text-2xl text-center font-bold">Add your car</Fieldset.Legend>
+          <Description className="text-center ">Your car Information.</Description>
           <FieldGroup>
             <TextField isRequired name="name">
               <Label>Car Name</Label>
