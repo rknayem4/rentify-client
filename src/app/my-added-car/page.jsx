@@ -10,12 +10,20 @@ const MyAddedCar = async () => {
     headers: await headers(),
   });
   const res = await fetch(
-    `http://localhost:8000/my-car-collection/${user?.id}`,
+    `http://localhost:8000/my-car-collection/${user.id}`,
+    {
+      cache: "no-store",
+    },
   );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch cars");
+  }
+
   const data = await res.json();
   console.log(user);
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto min-h-screen">
       <div className="my-3 flex justify-end ">
         <Link href={"/my-add"}>
           <Button className="rounded-sm" variant="secondary">
@@ -23,7 +31,7 @@ const MyAddedCar = async () => {
           </Button>
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1  lg:grid-cols-2 gap-4">
         {data?.length === 0 ? (
           <p>No cars found</p>
         ) : (

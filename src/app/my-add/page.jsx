@@ -47,11 +47,13 @@ const AddCarPage = () => {
       location: data.location,
       description: data.description,
     };
+    const {data: tokenData} = await authClient.token()
 
     const res = await fetch("http://localhost:8000/car-collection", {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`
       },
       body: JSON.stringify(carData),
     });
