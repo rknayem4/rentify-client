@@ -1,12 +1,5 @@
-import Image from "next/image";
 import React from "react";
-import {
-  FaCalendarCheck,
-  FaCarSide,
-  FaLocationDot,
-  FaMoneyBillWave,
-  FaUser,
-} from "react-icons/fa6";
+
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import BookingCard from "@/Components/BookingCard";
@@ -17,18 +10,22 @@ const MyBookingPage = async () => {
   });
 
   const res = await fetch(
-    `http://localhost:8000/car-booking-collection/${user?.id}`,
+    `http://localhost:8000/car-booking-collection/${user.id}`,
     {
       cache: "no-store",
-    }
+    },
   );
 
   const booking = await res.json();
+  const totalPrice = booking.reduce(
+    (total, item) => total + Number(item.price),
+    0,
+  );
+  console.log(booking);
 
   return (
     <section className="min-h-screen bg-[#f8fafc] py-14 px-6">
       <div className="max-w-7xl mx-auto">
-        
         {/* Heading */}
         <div className="mb-12">
           <h1 className="text-4xl font-extrabold text-[#004078]">
@@ -55,9 +52,19 @@ const MyBookingPage = async () => {
 
         {/* Booking Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {booking?.map((item) => (
-            <BookingCard key={item._id} item={item}></BookingCard>
+          {booking.map((item, ind) => (
+            <BookingCard key={ind} item={item}></BookingCard>
           ))}
+
+          <div className="col-span-full mt-8 bg-white rounded-3xl p-8 shadow-sm border border-gray-100 flex items-center justify-between">
+            <h2 className="text-3xl font-bold text-[#004078]">
+              Total Booking Price
+            </h2>
+
+            <span className="text-4xl font-extrabold text-[#753fdb]">
+              ${totalPrice}
+            </span>
+          </div>
         </div>
       </div>
     </section>

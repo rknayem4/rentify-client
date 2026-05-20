@@ -9,13 +9,13 @@ import {
   FieldGroup,
   Fieldset,
   Form,
-  Input,
   Label,
   ListBox,
   Modal,
   TextArea,
   TextField,
   Select,
+  DateField,
 } from "@heroui/react";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
@@ -36,6 +36,7 @@ export function BookingModel({ car }) {
       userId: user?.id,
       userName: user?.name,
       diverNeed: formValues.diverNeed,
+      bookingDate: formValues.date,
       note: formValues.note,
     };
     const res = await fetch("http://localhost:8000/car-booking-collection", {
@@ -100,6 +101,14 @@ export function BookingModel({ car }) {
                         </ListBox>
                       </Select.Popover>
                     </Select>
+                    <DateField isRequired  className="w-full" name="date">
+                      <Label>Date</Label>
+                      <DateField.Group>
+                        <DateField.Input>
+                          {(segment) => <DateField.Segment segment={segment} />}
+                        </DateField.Input>
+                      </DateField.Group>
+                    </DateField>
                     <TextField isRequired name="note">
                       <Label>Special Note</Label>
                       <TextArea placeholder="Tell us ....." />
