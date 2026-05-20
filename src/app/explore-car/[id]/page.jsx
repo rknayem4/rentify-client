@@ -1,3 +1,4 @@
+import { BookingModel } from "@/Components/BookingModel";
 import Image from "next/image";
 import React from "react";
 import {
@@ -17,7 +18,7 @@ const DetailsPage = async ({ params }) => {
     cache: "no-store",
   });
 
-  const data = await res.json();
+  const car = await res.json();
 
   const {
     carImage,
@@ -30,7 +31,7 @@ const DetailsPage = async ({ params }) => {
     type,
     userEmail,
     usrName,
-  } = data;
+  } = car;
 
   return (
     <section className="min-h-screen bg-[#f8fafc] py-14 px-6">
@@ -196,9 +197,8 @@ const DetailsPage = async ({ params }) => {
             </div>
 
             {/* Button */}
-            <button className="w-full mt-10 py-4 rounded-2xl bg-[#004078] hover:bg-[#00315f] transition-all duration-300 text-white text-lg font-semibold">
-              Book Now
-            </button>
+            <BookingModel car={car}></BookingModel>
+            
           </div>
         </div>
       </div>

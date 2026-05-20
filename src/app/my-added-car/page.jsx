@@ -9,7 +9,9 @@ const MyAddedCar = async () => {
   const { user } = await auth.api.getSession({
     headers: await headers(),
   });
-  const res = await fetch(`http://localhost:8000/car-collection/${user?.id}`);
+  const res = await fetch(
+    `http://localhost:8000/my-car-collection/${user?.id}`,
+  );
   const data = await res.json();
   console.log(user);
   return (
