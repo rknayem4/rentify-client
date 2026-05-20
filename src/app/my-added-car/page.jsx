@@ -11,6 +11,7 @@ const MyAddedCar = async () => {
   });
   const res = await fetch(`http://localhost:8000/car-collection/${user?.id}`);
   const data = await res.json();
+  console.log(user);
   return (
     <div className="container mx-auto">
       <div className="my-3 flex justify-end ">
@@ -21,9 +22,11 @@ const MyAddedCar = async () => {
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid lg:grid-cols-3 gap-4">
-        {data.map((res) => (
-          <MyAddedCard key={res._id} res={res}></MyAddedCard>
-        ))}
+        {data?.length === 0 ? (
+          <p>No cars found</p>
+        ) : (
+          data?.map((res) => <MyAddedCard key={res._id} res={res} />)
+        )}
       </div>
     </div>
   );

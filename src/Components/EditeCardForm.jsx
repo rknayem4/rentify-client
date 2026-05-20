@@ -37,42 +37,39 @@ export function EditCardForm({ res }) {
     _id,
   } = res;
 
-const router = useRouter();
+  const router = useRouter();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const formData = new FormData(e.currentTarget);
-  const formValues = Object.fromEntries(formData.entries());
+    const formData = new FormData(e.currentTarget);
+    const formValues = Object.fromEntries(formData.entries());
 
-  const carChange = {
-    carName: formValues.name,
-    price: formValues.price,
-    type: formValues.type,
-    carImage: formValues.image,
-    seat: formValues.seat,
-    status: formValues.status,
-    location: formValues.location,
-    description: formValues.description,
-  };
+    const carChange = {
+      carName: formValues.name,
+      price: formValues.price,
+      type: formValues.type,
+      carImage: formValues.image,
+      seat: formValues.seat,
+      status: formValues.status,
+      location: formValues.location,
+      description: formValues.description,
+    };
 
-  const res = await fetch(
-    `http://localhost:8000/car-collection/${_id}`,
-    {
+    const res = await fetch(`http://localhost:8000/car-collection/${_id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify(carChange),
-    }
-  );
+    });
 
-  await res.json();
+    await res.json();
 
-  toast.success("Car updated successfully");
+    toast.success("Car updated successfully");
 
-  router.push("/my-added-car");
-};
+    router.push("/my-added-car");
+  };
   const carTypes = [
     { id: "sedan", name: "Sedan" },
     { id: "suv", name: "SUV" },
@@ -168,8 +165,8 @@ const handleSubmit = async (e) => {
                               <ListBox.ItemIndicator />
                             </ListBox.Item>
 
-                            <ListBox.Item id="Available" textValue="busy">
-                              Available
+                            <ListBox.Item id="Now is Busy" textValue="busy">
+                              Now is Busy
                               <ListBox.ItemIndicator />
                             </ListBox.Item>
                           </ListBox>
@@ -198,7 +195,7 @@ const handleSubmit = async (e) => {
                     </TextField>
                   </FieldGroup>
                   <Fieldset.Actions>
-                    <Button  type="submit">
+                    <Button type="submit">
                       <FloppyDisk />
                       Save changes
                     </Button>

@@ -20,17 +20,10 @@ const CarCard = ({ car }) => {
   } = car;
 
   return (
-    <Card
-      className="min-w-[320px] bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
-    >
+    <Card className="min-w-[320px] bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
       {/* Image */}
       <div className="relative h-56 w-full">
-        <Image
-          src={carImage}
-          alt={carName}
-          fill
-          className="object-cover"
-        />
+        <Image src={carImage} alt={carName} fill className="object-cover" />
       </div>
 
       {/* Content */}
@@ -53,7 +46,7 @@ const CarCard = ({ car }) => {
           </div>
 
           <Link
-            href={`/cars/${_id}`}
+            href={`/explore-car/${_id}`}
             className="px-5 py-3 rounded-xl bg-[#004078] text-white hover:bg-[#00315f] transition-all duration-300"
           >
             View Details
