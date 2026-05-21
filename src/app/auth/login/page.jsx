@@ -13,11 +13,13 @@ import {
 } from "@heroui/react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
 import React from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
+   const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -27,6 +29,7 @@ const LoginPage = () => {
       password: user.password,
     });
     if (data) {
+      router.refresh();
       redirect("/");
     }
     if (error) {
