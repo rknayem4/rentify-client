@@ -12,8 +12,7 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
@@ -30,7 +29,7 @@ const LoginPage = () => {
     });
     if (data) {
       router.refresh();
-      redirect("/");
+      router.push('/')
     }
     if (error) {
       toast.error(error.message);
@@ -38,7 +37,7 @@ const LoginPage = () => {
     // console.log(user);
   };
   const handleGoogle =async ()=>{
-     const data = await authClient.signIn.social({
+    const data = await authClient.signIn.social({
     provider: "google",
   });
   console.log(data)

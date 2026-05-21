@@ -24,6 +24,9 @@ const SearchPage = () => {
     const loadCars = async () => {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/search-cars?search=${search}&type=${selectedType}`,
+        {
+          cache: "no-store",
+        },
       );
 
       const data = await res.json();
@@ -36,9 +39,7 @@ const SearchPage = () => {
 
   return (
     <div className="container mx-auto min-h-screen px-4 py-10">
-
       <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-between md:items-end mb-10">
-        
         <SearchField name="search" className="w-full md:max-w-md">
           <Label>Search Cars</Label>
 
@@ -56,7 +57,6 @@ const SearchPage = () => {
           </SearchField.Group>
         </SearchField>
 
-       
         <Select className="w-full md:max-w-xs" placeholder="Select Car Type">
           <Label>Car Type Filtering</Label>
 
@@ -83,14 +83,11 @@ const SearchPage = () => {
         </Select>
       </div>
 
-      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {cars?.length === 0 ? (
           <p className="text-gray-500 text-lg">No cars found.</p>
         ) : (
-          cars.map((car) => (
-            <CarCard key={car._id} car={car}></CarCard>
-          ))
+          cars.map((car) => <CarCard key={car._id} car={car}></CarCard>)
         )}
       </div>
     </div>

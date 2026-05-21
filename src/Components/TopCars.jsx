@@ -4,7 +4,9 @@ import React from "react";
 import CarCard from "./CarCard";
 
 const TopCars = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/car-collection`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/car-collection`, {
+    cache: "no-store",
+  });
 
   const cars = await res.json();
 
@@ -13,7 +15,6 @@ const TopCars = async () => {
   return (
     <section className="py-20 bg-[#f8fafc] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        
         {/* Heading */}
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-extrabold text-[#004078]">
@@ -21,8 +22,8 @@ const TopCars = async () => {
           </h2>
 
           <p className="mt-5 text-gray-600 text-lg">
-            Explore our most popular and premium rental cars
-            chosen by thousands of happy customers.
+            Explore our most popular and premium rental cars chosen by thousands
+            of happy customers.
           </p>
         </div>
 

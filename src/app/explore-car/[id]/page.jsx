@@ -20,11 +20,17 @@ const DetailsPage = async ({ params }) => {
   });
 
   // console.log(token)
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/car-collection/${id}`, {
-    headers: {
-      authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/car-collection/${id}`,
+    {
+      cache: "no-store",
     },
-  });
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
+  );
 
   const car = await res.json();
 
@@ -39,7 +45,7 @@ const DetailsPage = async ({ params }) => {
     type,
     userEmail,
     usrName,
-    bookingCount
+    bookingCount,
   } = car;
 
   return (
