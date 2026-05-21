@@ -17,6 +17,7 @@ const CarCard = ({ car }) => {
     userId,
     usrName,
     _id,
+    bookingCount,
   } = car;
   const carImg =
     car?.carImage ||
@@ -39,7 +40,12 @@ const CarCard = ({ car }) => {
           </span>
         </div>
 
-        <p className="text-gray-500 mt-3 line-clamp-2">{description}</p>
+        <p className="text-gray-500 mt-3 line-clamp-1">{description}</p>
+        <p>
+          Total Bookings : 
+          <strong> {bookingCount} </strong>
+          Times
+        </p>
 
         <div className="flex items-center justify-between mt-6">
           <div>

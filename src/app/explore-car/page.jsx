@@ -23,7 +23,7 @@ const SearchPage = () => {
   useEffect(() => {
     const loadCars = async () => {
       const res = await fetch(
-        `http://localhost:8000/search-cars?search=${search}&type=${selectedType}`,
+        `${process.env.NEXT_PUBLIC_URL}/search-cars?search=${search}&type=${selectedType}`,
       );
 
       const data = await res.json();

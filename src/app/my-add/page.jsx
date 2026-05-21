@@ -46,10 +46,11 @@ const AddCarPage = () => {
       status: data.status,
       location: data.location,
       description: data.description,
+      bookingCount: 0,  
     };
     const {data: tokenData} = await authClient.token()
 
-    const res = await fetch("http://localhost:8000/car-collection", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/car-collection`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -74,7 +75,7 @@ const AddCarPage = () => {
     { id: "sports", name: "Sports Car" },
   ];
   return (
-    <div className="min-w-screen mt-12 flex justify-center flex-col items-center">
+    <div className="min-w-screen mt-12 flex justify-center flex-col items-center p-3">
       <Form className="w-full max-w-150" onSubmit={onSubmit}>
         <Fieldset>
           <Fieldset.Legend className="text-2xl text-center font-bold">Add your car</Fieldset.Legend>
@@ -166,7 +167,7 @@ const AddCarPage = () => {
           <Fieldset.Actions>
             <Button type="submit">
               <FloppyDisk />
-              Save changes
+              Add your Car
             </Button>
             <Button type="reset" variant="secondary">
               Cancel

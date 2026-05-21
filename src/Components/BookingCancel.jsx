@@ -13,7 +13,7 @@ export function BookingCancel() {
             <AlertDialog.Header>
               <AlertDialog.Icon status="danger" />
               <AlertDialog.Heading>
-                Delete project permanently?
+                Delete Booking permanently?
               </AlertDialog.Heading>
             </AlertDialog.Header>
             <AlertDialog.Body>
@@ -27,7 +27,7 @@ export function BookingCancel() {
                 Cancel
               </Button>
               <Button slot="close" variant="danger">
-                Delete Project
+                Cancel Booking
               </Button>
             </AlertDialog.Footer>
           </AlertDialog.Dialog>

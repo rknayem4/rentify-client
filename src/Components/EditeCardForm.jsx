@@ -18,6 +18,7 @@ import {
 import toast from "react-hot-toast";
 import { FaEdit } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export function EditCardForm({ res }) {
   // const { data: session } = authClient.useSession();
@@ -41,7 +42,6 @@ export function EditCardForm({ res }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
     const formValues = Object.fromEntries(formData.entries());
 
@@ -56,7 +56,7 @@ export function EditCardForm({ res }) {
       description: formValues.description,
     };
 
-    const res = await fetch(`http://localhost:8000/car-collection/${_id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/car-collection/${_id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

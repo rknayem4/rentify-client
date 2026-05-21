@@ -23,7 +23,7 @@ import toast from "react-hot-toast";
 export function BookingModel({ car }) {
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  const { carName, carImage, location, price } = car;
+  const { carName, carImage, location, price, _id } = car;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -31,6 +31,7 @@ export function BookingModel({ car }) {
     const bookInfo = {
       carName,
       carImage,
+      carId: _id,
       location,
       price,
       userId: user?.id,
@@ -39,10 +40,12 @@ export function BookingModel({ car }) {
       bookingDate: formValues.date,
       note: formValues.note,
     };
-    const res = await fetch("http://localhost:8000/car-booking-collection", {
+    const { data: tokenData } = await authClient.token();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/car-booking-collection`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(bookInfo),
     });
@@ -101,7 +104,7 @@ export function BookingModel({ car }) {
                         </ListBox>
                       </Select.Popover>
                     </Select>
-                    <DateField isRequired  className="w-full" name="date">
+                    <DateField isRequired className="w-full" name="date">
                       <Label>Date</Label>
                       <DateField.Group>
                         <DateField.Input>
@@ -118,17 +121,12 @@ export function BookingModel({ car }) {
                   <Fieldset.Actions>
                     <Button type="submit">
                       <FloppyDisk />
-                      Save changes
+                      Booking Car
                     </Button>
                   </Fieldset.Actions>
                 </Fieldset>
               </Form>
             </Modal.Body>
-            {/* <Modal.Footer>
-              <Button className="w-full" slot="close">
-                Continue
-              </Button>
-            </Modal.Footer> */}
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Backdrop>

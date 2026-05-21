@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
@@ -7,10 +8,12 @@ export function DeleteAlert({ res: resData }) {
   const router = useRouter();
   const { carName, _id } = resData;
   const handleDelete = async () => {
-    const res = await fetch(`http://localhost:8000/car-collection/${_id}`, {
+    const { data: tokenData } = await authClient.token();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/car-collection/${_id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
     });
     await res.json();
@@ -43,7 +46,7 @@ export function DeleteAlert({ res: resData }) {
                 Cancel
               </Button>
               <Button onClick={handleDelete} slot="close" variant="danger">
-                Delete Project
+                Delete Car
               </Button>
             </AlertDialog.Footer>
           </AlertDialog.Dialog>

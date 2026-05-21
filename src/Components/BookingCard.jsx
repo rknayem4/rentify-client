@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -16,7 +17,7 @@ import { FaLocationDot } from "react-icons/fa6";
 const BookingCard = ({ item }) => {
   const handleSubmit = async () => {
     const res = await fetch(
-      `http://localhost:8000/car-booking-collection/${item._id}`,
+      `${process.env.NEXT_PUBLIC_URL}/car-booking-collection/${item._id}`,
       {
         method: "DELETE",
         headers: {
@@ -136,7 +137,7 @@ const BookingCard = ({ item }) => {
           </div>
           <div>
             <AlertDialog>
-              <Button variant="danger">Delete Project</Button>
+              <Button variant="danger">Cancel Booking</Button>
               <AlertDialog.Backdrop>
                 <AlertDialog.Container>
                   <AlertDialog.Dialog className="sm:max-w-100">
@@ -163,7 +164,7 @@ const BookingCard = ({ item }) => {
                         slot="close"
                         variant="danger"
                       >
-                        Delete Project
+                        Conform
                       </Button>
                     </AlertDialog.Footer>
                   </AlertDialog.Dialog>

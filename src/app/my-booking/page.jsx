@@ -8,9 +8,17 @@ const MyBookingPage = async () => {
   const { user } = await auth.api.getSession({
     headers: await headers(),
   });
-
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
   const res = await fetch(
-    `http://localhost:8000/car-booking-collection/${user.id}`,
+    `${process.env.NEXT_PUBLIC_URL}/car-booking-collection/${user.id}`,
+
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
     {
       cache: "no-store",
     },

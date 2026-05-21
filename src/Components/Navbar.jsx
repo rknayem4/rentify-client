@@ -28,6 +28,7 @@ const NavBar = () => {
           <NabLink href={"/explore-car"}>Explore Cars</NabLink>
           <NabLink href={"/my-booking"}>My Booking</NabLink>
           <NabLink href={"/my-added-car"}>My Added </NabLink>
+          <NabLink href={"/my-add"}>Add My Car</NabLink>
         </ul>
         {session ? (
           <UserProfile session={session} isPending={isPending}></UserProfile>

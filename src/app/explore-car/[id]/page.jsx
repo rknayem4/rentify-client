@@ -15,12 +15,12 @@ import {
 
 const DetailsPage = async ({ params }) => {
   const { id } = await params;
-  const {token} = await auth.api.getToken({
+  const { token } = await auth.api.getToken({
     headers: await headers(),
   });
-  
+
   // console.log(token)
-  const res = await fetch(`http://localhost:8000/car-collection/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/car-collection/${id}`, {
     headers: {
       authorization: `Bearer ${token}`,
     },
@@ -39,6 +39,7 @@ const DetailsPage = async ({ params }) => {
     type,
     userEmail,
     usrName,
+    bookingCount
   } = car;
 
   return (
@@ -47,7 +48,7 @@ const DetailsPage = async ({ params }) => {
         {/* Main Container */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Left Side Image */}
-          <div className="relative h-[500px] overflow-hidden rounded-3xl shadow-xl">
+          <div className="relative h-125 overflow-hidden rounded-3xl shadow-xl">
             <Image src={carImage} alt={carName} fill className="object-cover" />
 
             {/* Status Badge */}
@@ -81,7 +82,13 @@ const DetailsPage = async ({ params }) => {
 
               <p className="text-gray-600 leading-relaxed">{description}</p>
             </div>
+            <div className="bg-[#eef5ff] px-4 py-2 rounded-xl">
+              <p className="text-sm text-gray-500">Total Booked</p>
 
+              <h3 className="text-xl font-bold text-[#004078]">
+                {bookingCount} times
+              </h3>
+            </div>
             {/* Car Info */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-10">
               <div className="bg-[#f8fafc] rounded-2xl p-5 flex items-center gap-4">

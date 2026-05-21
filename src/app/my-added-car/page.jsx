@@ -9,8 +9,16 @@ const MyAddedCar = async () => {
   const { user } = await auth.api.getSession({
     headers: await headers(),
   });
+  const { token } = await auth.api.getToken({
+      headers: await headers(),
+    });
   const res = await fetch(
-    `http://localhost:8000/my-car-collection/${user.id}`,
+    `${process.env.NEXT_PUBLIC_URL}/my-car-collection/${user.id}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
     {
       cache: "no-store",
     },

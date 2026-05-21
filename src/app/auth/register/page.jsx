@@ -29,7 +29,7 @@ const page = () => {
       image: user.photo,
     });
     if (data) {
-      redirect("/");
+      redirect("/auth/login");
     }
     if (error) {
       toast.error(error.message);
