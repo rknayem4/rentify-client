@@ -55,14 +55,18 @@ export function EditCardForm({ res }) {
       location: formValues.location,
       description: formValues.description,
     };
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/car-collection/${_id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
+    const { data: tokenData } = await authClient.token();
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/car-collection/${_id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
+        },
+        body: JSON.stringify(carChange),
       },
-      body: JSON.stringify(carChange),
-    });
+    );
 
     await res.json();
 
