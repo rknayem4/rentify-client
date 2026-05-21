@@ -12,12 +12,13 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
-const page = () => {
+const RegisterPage = () => {
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -29,6 +30,7 @@ const page = () => {
       image: user.photo,
     });
     if (data) {
+      router.refresh();
       redirect("/auth/login");
     }
     if (error) {
@@ -163,4 +165,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default RegisterPage;
