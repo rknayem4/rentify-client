@@ -1,15 +1,14 @@
 "use client";
 
-import { Moon,  Sun } from "@gravity-ui/icons";
+import { Moon, Sun } from "@gravity-ui/icons";
 import { Switch } from "@heroui/react";
 import { useTheme } from "next-themes";
 
 export function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
-// <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+  // <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
   return (
     <Switch onChange={() => setTheme(theme === "dark" ? "light" : "dark")}>
-      
       {({ isSelected }) => (
         <>
           <Switch.Control
@@ -20,9 +19,9 @@ export function ThemeSwitch() {
             >
               <Switch.Icon>
                 {isSelected ? (
-                  <Moon className="size-4 text-cyan-600" />
-                ) : (
                   <Sun className="size-4 text-blue-600" />
+                ) : (
+                  <Moon className="size-4 text-cyan-600" />
                 )}
               </Switch.Icon>
             </Switch.Thumb>
