@@ -49,7 +49,7 @@ const DetailsPage = async ({ params }) => {
   } = car;
 
   return (
-    <section className="min-h-screen bg-[#f8fafc] py-14 px-6">
+    <section className="min-h-screen  py-14 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Main Container */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -64,7 +64,7 @@ const DetailsPage = async ({ params }) => {
           </div>
 
           {/* Right Side Content */}
-          <div className="bg-white rounded-3xl shadow-lg p-8 md:p-10">
+          <div className=" rounded-3xl shadow-lg p-8 md:p-10">
             {/* Title */}
             <div className="flex items-center gap-3">
               <div className="w-14 h-14 rounded-2xl bg-[#eef5ff] text-[#004078] flex items-center justify-center text-2xl">

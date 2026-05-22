@@ -32,7 +32,7 @@ const BookingCard = ({ item }) => {
   return (
     <div
       key={item?._id}
-      className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300"
+      className=" rounded-3xl overflow-hidden shadow-sm border border-gray-300 hover:shadow-xl transition-all duration-300"
     >
       {/* Image */}
       <div className="relative max-h-40 w-full overflow-hidden">

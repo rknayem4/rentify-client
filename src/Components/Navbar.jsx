@@ -36,7 +36,7 @@ const NavBar = () => {
           {session ? (
             <UserProfile session={session} isPending={isPending}></UserProfile>
           ) : (
-            <ul className="flex gap-4">
+            <ul className="flex gap-4 ">
               <NabLink href={"/auth/login"}>Login</NabLink>
             </ul>
           )}

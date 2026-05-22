@@ -117,7 +117,7 @@ const RegisterPage = () => {
                 <Button
                   type="reset"
                   variant="secondary "
-                  className={"text-[#004078] bg-white rounded-md"}
+                  className={"text-[#004078]  rounded-md"}
                 >
                   Reset
                 </Button>

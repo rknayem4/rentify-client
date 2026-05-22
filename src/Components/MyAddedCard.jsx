@@ -20,10 +20,10 @@ const MyAddedCard = ({ res }) => {
   } = res;
 
   return (
-    <Card className="w-full overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm hover:shadow-2xl transition-all duration-300">
+    <Card className="w-full overflow-hidden rounded-3xl border border-gray-100  shadow-sm hover:shadow-2xl transition-all duration-300">
       
       {/* Car Image */}
-      <div className="relative w-full h-[240px] overflow-hidden">
+      <div className="relative w-full h-60 overflow-hidden">
         <Image
           src={carImage}
           fill

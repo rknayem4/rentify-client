@@ -32,7 +32,7 @@ const MyBookingPage = async () => {
   console.log(booking);
 
   return (
-    <section className="min-h-screen bg-[#f8fafc] py-14 px-6">
+    <section className="min-h-screen  py-14 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="mb-12">
@@ -47,7 +47,7 @@ const MyBookingPage = async () => {
 
         {/* Empty State */}
         {booking?.length === 0 && (
-          <div className="bg-white rounded-3xl p-14 text-center shadow-sm border border-gray-100">
+          <div className=" rounded-3xl p-14 text-center shadow-sm border border-gray-100">
             <h2 className="text-3xl font-bold text-[#004078]">
               No Bookings Found
             </h2>
@@ -64,7 +64,7 @@ const MyBookingPage = async () => {
             <BookingCard key={ind} item={item}></BookingCard>
           ))}
 
-          <div className="col-span-full mt-8 bg-white rounded-3xl p-8 shadow-sm border border-gray-100 flex items-center justify-between">
+          <div className="col-span-full mt-8 rounded-3xl p-8 shadow-sm border border-gray-300 flex items-center justify-between">
             <h2 className="text-3xl font-bold text-[#004078]">
               Total Booking Price
             </h2>
