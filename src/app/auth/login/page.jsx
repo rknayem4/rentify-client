@@ -18,30 +18,39 @@ import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
-   const router = useRouter();
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
+
     const { data, error } = await authClient.signIn.email({
       email: user.email,
       password: user.password,
     });
+
     if (data) {
+      toast.success("Login successful");
+
       router.refresh();
-      router.push('/')
+
+      setTimeout(() => {
+        router.refresh();
+        router.replace("/");
+      }, 500);
     }
+
     if (error) {
-      toast.error(error.message);
+      return toast.error(error.message);
     }
-    // console.log(user);
   };
-  const handleGoogle =async ()=>{
-    const data = await authClient.signIn.social({
-    provider: "google",
-  });
-  console.log(data)
-  }
+  const handleGoogle = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+  };
   return (
     <div
       className="min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center px-6 py-10"
@@ -117,7 +126,7 @@ const LoginPage = () => {
             <div className="flex gap-2">
               <Button type="submit" className={"bg-[#004078] rounded-md"}>
                 <Check />
-                Sign Up
+                Login
               </Button>
               <Button
                 type="reset"
@@ -135,8 +144,10 @@ const LoginPage = () => {
           </div>
           <div>
             <Button
-            onClick={handleGoogle}
-            variant="outline" className={"rounded-none w-full"}>
+              onClick={handleGoogle}
+              variant="outline"
+              className={"rounded-none w-full"}
+            >
               <FcGoogle /> Sign In with Google
             </Button>
           </div>
