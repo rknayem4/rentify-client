@@ -24,14 +24,14 @@ const DetailsPage = async ({ params }) => {
     `${process.env.NEXT_PUBLIC_URL}/car-collection/${id}`,
     {
       cache: "no-store",
-    },
-    {
       headers: {
         authorization: `Bearer ${token}`,
       },
     },
   );
-
+  if (!res.ok) {
+    throw new Error("Failed to fetch car");
+  }
   const car = await res.json();
 
   const {
