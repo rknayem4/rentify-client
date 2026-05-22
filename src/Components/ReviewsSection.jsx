@@ -39,7 +39,7 @@ const reviews = [
 
 const ReviewsSection = () => {
   return (
-    <section className="py-20 px-6 bg-gray-50">
+    <section className="py-20 px-6 ">
       <div className="max-w-7xl mx-auto">
         
         {/* Heading */}
@@ -59,7 +59,7 @@ const ReviewsSection = () => {
           {reviews.map((review) => (
             <div
               key={review.id}
-              className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:-translate-y-2 transition-all duration-300"
+              className=" rounded-3xl p-8 shadow-lg border border-gray-100 hover:-translate-y-2 transition-all duration-300"
             >
               
               {/* User Info */}

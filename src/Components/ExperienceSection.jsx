@@ -39,7 +39,7 @@ const ExperienceSection = () => {
   ];
 
   return (
-    <section className="py-20 px-6 bg-[#f8fafc]">
+    <section className="py-20 px-6 ">
       <div className="max-w-7xl mx-auto">
         
         {/* Heading */}
@@ -59,11 +59,11 @@ const ExperienceSection = () => {
           {experiences.map((item) => (
             <div
               key={item.id}
-              className="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300"
+              className=" border border-gray-100 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300"
             >
               
               {/* Icon */}
-              <div className="w-16 h-16 rounded-2xl bg-[#eef5ff] text-[#004078] flex items-center justify-center text-3xl">
+              <div className="w-16 h-16 rounded-2xl  text-[#004078] flex items-center justify-center text-3xl">
                 {item.icon}
               </div>
 

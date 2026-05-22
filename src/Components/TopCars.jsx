@@ -13,7 +13,7 @@ const TopCars = async () => {
   const topCars = cars.slice(0, 6);
 
   return (
-    <section className="py-20 bg-[#f8fafc] overflow-hidden">
+    <section className="py-20  overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
         <div className="text-center max-w-3xl mx-auto">

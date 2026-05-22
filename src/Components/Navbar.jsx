@@ -5,12 +5,13 @@ import { Navigation } from "./Menu";
 import UserProfile from "./UserProfile";
 import NabLink from "./NavLink";
 import { authClient } from "@/lib/auth-client";
+import { ThemeSwitch } from "./ThemeSwitch";
 
 const NavBar = () => {
-  const {data: session, isPending}= authClient.useSession()
-//  console.log(session)
+  const { data: session, isPending } = authClient.useSession();
+  //  console.log(session)
   return (
-    <div className="shadow sticky top-0 min-h-15 flex justify-center items-center text-black bg-white z-20">
+    <div className="shadow sticky backdrop-blur-xl overflow-hidden top-0 min-h-15 flex justify-center items-center  z-20">
       <div className="container mx-auto flex justify-between   items-center p-2 ">
         <div className=" flex justify-center items-center gap-4 ">
           <div className="lg:hidden flex">{<Navigation></Navigation>}</div>
@@ -30,13 +31,16 @@ const NavBar = () => {
           <NabLink href={"/my-added-car"}>My Added </NabLink>
           <NabLink href={"/my-add"}>Add My Car</NabLink>
         </ul>
-        {session ? (
-          <UserProfile session={session} isPending={isPending}></UserProfile>
-        ) : (
-          <ul className="flex gap-4">
-            <NabLink href={"/auth/login"}>Login</NabLink>
-          </ul>
-        )}
+        <div className="flex  items-center gap-3">
+          <ThemeSwitch></ThemeSwitch>
+          {session ? (
+            <UserProfile session={session} isPending={isPending}></UserProfile>
+          ) : (
+            <ul className="flex gap-4">
+              <NabLink href={"/auth/login"}>Login</NabLink>
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );
